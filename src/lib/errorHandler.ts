@@ -2,9 +2,6 @@ import { logger, LogCategory } from './logger';
 import Toast from 'react-native-toast-message';
 import { ui } from './ui';
 
-/**
- * Interface for application errors
- */
 export interface AppError extends Error {
   code?: string;
   category?: LogCategory;
@@ -38,8 +35,6 @@ export const ErrorHandler = {
     
     logger.error(message, error, LogCategory.DB);
     
-    // We might not always want to show a toast for every DB background error,
-    // but for explicit user actions, it's good.
     return message;
   },
 

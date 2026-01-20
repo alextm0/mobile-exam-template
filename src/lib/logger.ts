@@ -1,6 +1,3 @@
-/**
- * Log levels for the application
- */
 export enum LogLevel {
   DEBUG = 'DEBUG',
   INFO = 'INFO',
@@ -8,9 +5,6 @@ export enum LogLevel {
   ERROR = 'ERROR',
 }
 
-/**
- * Log categories to distinguish where the log is coming from
- */
 export enum LogCategory {
   SERVER = 'SERVER',
   DB = 'DB',
@@ -22,9 +16,6 @@ export enum LogCategory {
 class Logger {
   private isDevelopment = __DEV__;
 
-  /**
-   * General log method
-   */
   log(level: LogLevel, category: LogCategory, message: string, detail?: any) {
     if (!this.isDevelopment && level === LogLevel.DEBUG) return;
 
@@ -47,7 +38,6 @@ class Logger {
     }
   }
 
-  // Helper methods for semantic logging
   server(message: string, detail?: any) {
     this.log(LogLevel.INFO, LogCategory.SERVER, message, detail);
   }

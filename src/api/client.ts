@@ -33,7 +33,6 @@ apiClient.interceptors.response.use(
     
     console.error(`[API Error] ${status || 'NET'} ${error.config?.url}: ${message}`);
     
-    // We wrap the error message to be more user-friendly
     const friendlyError = new Error(message);
     (friendlyError as any).status = status;
     
