@@ -62,13 +62,21 @@ export default function App() {
   // WebSocket Notification Handler
   const onMessage = useCallback((data: any) => {
     // Requirements say: Display toast notification for new items
-    if (data?.name) {
-      Toast.show({
-        type: 'info',
-        text1: 'New Item Added!',
-        text2: `${data.name} (${data.category}) - ${data.status}`,
-        position: 'bottom',
-      });
+    if (data?.id && data?.name) {
+      const { items, addItem } = useAppStore.getState();
+      
+      // Prevent duplicates if the item was added by this device and already exists in list
+      const exists = items.some(i => i.id === data.id);
+      
+      if (!exists) {
+        addItem(data);
+        Toast.show({
+          type: 'info',
+          text1: 'New Item Added!',
+          text2: `${data.name} (${data.category}) - ${data.status}`,
+          position: 'bottom',
+        });
+      }
     }
   }, []);
 

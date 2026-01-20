@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, ScrollView, Pressable, Alert, ActivityIndicator } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, Pressable, Alert, ActivityIndicator, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { InventoryItem } from '../types/types';
 import { ActionButton } from '../components/ActionButton';
@@ -146,7 +146,13 @@ export const ItemDetailScreen = () => {
 
       {!isOnline && (
         <View style={styles.offlineWarning}>
-          <Text style={styles.offlineText}>Viewing cached data. Connect to interent for latest updates.</Text>
+          <Text style={styles.offlineText}>Viewing cached data. Connect to internet for latest updates.</Text>
+          <TouchableOpacity 
+            onPress={() => useAppStore.getState().setOnlineStatus(true)}
+            style={styles.retryInlineBtn}
+          >
+            <Text style={styles.retryInlineText}>Retry</Text>
+          </TouchableOpacity>
         </View>
       )}
     </SafeAreaView>
@@ -249,5 +255,17 @@ const styles = StyleSheet.create({
     color: '#D9480F',
     fontSize: 12,
     fontWeight: '600',
+  },
+  retryInlineBtn: {
+    marginLeft: 10,
+    backgroundColor: '#D9480F',
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    borderRadius: 4,
+  },
+  retryInlineText: {
+    color: '#FFFFFF',
+    fontSize: 10,
+    fontWeight: '700',
   }
 });
